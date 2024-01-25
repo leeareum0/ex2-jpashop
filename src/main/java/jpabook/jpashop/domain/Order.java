@@ -17,15 +17,15 @@ public class Order {
 //    private Long memberId;
 
     //연관관계 매핑 - 연관관계 주인
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToOne //일대일 관계
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //일대일 관계
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
